@@ -90,6 +90,7 @@ def quotationconfirmation(request):
 
     i = 0
     items_length = len(items_id)
+    total = 0
     grand_total = Decimal(0)
 
     while i < items_length:
@@ -102,6 +103,7 @@ def quotationconfirmation(request):
             'total_price': total
         }
         items.append(item_table)
+        grand_total = grand_total + total
         i = i + 1
     print(items)
        
@@ -150,6 +152,7 @@ def quotationdetails(request):
 
     i = 0
     items_length = len(items_id)
+    total = 0
     grand_total = Decimal(0)
 
     while i < items_length:
@@ -162,6 +165,7 @@ def quotationdetails(request):
             'unit_price': items_unit_price[i],
             'total_price': total
         }
+        grand_total = grand_total + total
         items.append(item_table)
         i = i + 1
     print(items)
@@ -177,7 +181,7 @@ def quotationdetails(request):
                             person_id = staff_info,
                             description = description,
                             vendor_id = vendor_info, 
-                            request_for_quotation_id = request_for_quotation)
+                            request_for_quotation_id = request_for_quotation_id)
     quo_info.save()
 
     quotation = Quotation.objects.get(quotation_id = quo_id)
