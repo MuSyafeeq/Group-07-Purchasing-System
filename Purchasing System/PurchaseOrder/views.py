@@ -240,11 +240,19 @@ def purchaseorderdetails(request):
         x.add_row([item['item_id'],item['item_name'],item['quantity'],item['unit_price'],item['total_price']])
 
     subject = 'PURCHASE ORDER INFORMATION: '+ po_id
-    message = 'This is the Purchase Order Information: \n'+'Person In Charge: '+staff.person_name+'\n'+'Ship to:'+staff.person_address+ '\n' +'Purchase Order Number: ' + po_id + '\n'+'Quotation ID: ' + quotation.quotation_id + '\n'+'Time Issued: ' + str(current_time) + '\n'+'Vendor ID: ' + vendor_id + '\n'+'Description: ' + description + '\n'+'Shipping Instructions: ' + shipping_inst + '\n'+ str(x) +'\n'
+    message = ['This is the Purchase Order Information: \n'+'Person In Charge: '+staff.person_name
+              +'\n'+'Ship to:'+staff.person_address+ '\n' 
+              +'Purchase Order Number: ' + po_id 
+              + '\n'+'Quotation ID: ' + quotation.quotation_id 
+              + '\n'+'Time Issued: ' + str(current_time) 
+              + '\n'+'Vendor ID: ' + vendor_id 
+              + '\n'+'Description: ' + description 
+              + '\n'+'Shipping Instructions: ' + shipping_inst 
+              + '\n'+ str(x) +'\n']
 
-    email_from = settings.EMAIL_HOST_USER
+    email_from = request.user.email
     recipient_list = [vendor_info.vendor_email,]
-    send_mail( subject, message, email_from, recipient_list )
+    send_mail( subject, message, email_from, recipient_list, True)
 
     # info pass to html
     context = {
