@@ -52,7 +52,7 @@ def fillinginvoice(request):
                 'rows':item_list
             }
 
-        responsesItems = render(request,'Invoice/invoiceform.html',context).content
+        responsesItems = render(request,'Invoice/invoiceform.html',context).content 
         return render(request,'Invoice/invoiceform.html',context)
 
     except PurchaseOrder.DoesNotExist:
