@@ -56,7 +56,7 @@ def fillingpurchaseorder(request):
         purchaseorder = PurchaseOrder.objects.get(quotation_id = quo_id)
         print(purchaseorder)
 
-        context = { 'error': 'The purchase order is already Issued! Purchase Order Number: ' + purchaseorder.purchase_order_id, 
+        context = { 'error': 'The purchase order is already Issued! Purchase Order Number: ' + purchaseorder.purchase_order_id,
                     'title': 'Purchase Order Form'
             }
         return render(request,'PurchaseOrder/purchaseorderform.html',context)
